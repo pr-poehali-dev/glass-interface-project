@@ -21,19 +21,17 @@ const Index = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const wordCloud = [
-    { text: 'Отопление', size: 48, weight: 800 },
-    { text: 'Дороги', size: 32, weight: 700 },
-    { text: 'Благоустройство', size: 28, weight: 600 },
-    { text: 'Водоснабжение', size: 24, weight: 600 },
-    { text: 'Освещение', size: 30, weight: 700 },
-    { text: 'Транспорт', size: 26, weight: 600 },
-    { text: 'Здравоохранение', size: 22, weight: 500 },
-    { text: 'Образование', size: 24, weight: 600 },
-    { text: 'Социальная защита', size: 20, weight: 500 },
-    { text: 'ЖКХ', size: 34, weight: 700 },
-    { text: 'Экология', size: 22, weight: 500 },
-    { text: 'Культура', size: 18, weight: 500 },
+  const investProjects = [
+    { name: 'Строительство спорткомплекса', progress: 85, emoji: '🏋️', sources: ['Регион 45%', 'Федерация 40%', 'Местный 15%'] },
+    { name: 'Реконструкция школы №3', progress: 62, emoji: '🏫', sources: ['Регион 60%', 'Местный 40%'] },
+    { name: 'Парковая зона «Зелёный остров»', progress: 40, emoji: '🌳', sources: ['Федерация 70%', 'Местный 30%'] },
+    { name: 'Модернизация теплосетей', progress: 95, emoji: '🔥', sources: ['Регион 55%', 'Федерация 45%'] },
+  ];
+
+  const fundingSources = [
+    { source: 'Региональный бюджет', amount: 52, color: '#ef4444' },
+    { source: 'Федеральный бюджет', amount: 32, color: '#fbbf24' },
+    { source: 'Местный бюджет', amount: 16, color: '#60a5fa' },
   ];
 
   const tasks = [
@@ -250,23 +248,85 @@ const Index = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <Card className="glass rounded-3xl p-6 shadow-lg">
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-              <Icon name="MessageSquare" className="text-red-500" size={28} />
-              Облако обращений граждан
+              <Icon name="TrendingUp" className="text-red-500" size={28} />
+              Реализация инвестпроектов
             </h2>
-            <div className="flex flex-wrap items-center justify-center gap-4 p-8 bg-gradient-to-br from-red-50/50 to-yellow-50/50 rounded-2xl min-h-[280px]">
-              {wordCloud.map((word, index) => (
-                <span
-                  key={index}
-                  className="cursor-pointer transition-all hover:scale-110 hover:text-red-600"
-                  style={{
-                    fontSize: `${word.size}px`,
-                    fontWeight: word.weight,
-                    color: word.size > 35 ? '#ef4444' : word.size > 25 ? '#f59e0b' : '#6b7280',
-                  }}
-                >
-                  {word.text}
-                </span>
-              ))}
+            <div className="space-y-4">
+              <div className="space-y-3">
+                {investProjects.map((project, index) => (
+                  <div key={index} className="bg-white/60 rounded-xl p-3 border-2 border-gray-200">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl">{project.emoji}</span>
+                        <h3 className="font-semibold text-sm text-gray-900">{project.name}</h3>
+                      </div>
+                      <span className="text-lg font-bold text-red-600">{project.progress}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
+                      <div
+                        className="h-3 rounded-full bg-gradient-to-r from-red-500 to-yellow-500 transition-all"
+                        style={{ width: `${project.progress}%` }}
+                      />
+                    </div>
+                    <div className="flex flex-wrap gap-1">
+                      {project.sources.map((source, idx) => (
+                        <span key={idx} className="text-xs bg-gray-100 px-2 py-0.5 rounded-full text-gray-700">
+                          {source}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-gradient-to-br from-red-50/50 to-yellow-50/50 rounded-2xl p-4">
+                <h3 className="font-bold text-sm mb-3 text-center">Источники финансирования</h3>
+                <div className="flex items-center justify-center gap-4 mb-3">
+                  {fundingSources.map((fund, index) => {
+                    const radius = 45;
+                    const circumference = 2 * Math.PI * radius;
+                    const offset = circumference - (fund.amount / 100) * circumference;
+                    const rotate = index === 0 ? 0 : fundingSources.slice(0, index).reduce((sum, f) => sum + (f.amount / 100) * 360, 0);
+                    
+                    return (
+                      <div key={index} className="text-center">
+                        <svg width="100" height="100" className="transform -rotate-90">
+                          <circle
+                            cx="50"
+                            cy="50"
+                            r={radius}
+                            fill="none"
+                            stroke="#e5e7eb"
+                            strokeWidth="10"
+                          />
+                          <circle
+                            cx="50"
+                            cy="50"
+                            r={radius}
+                            fill="none"
+                            stroke={fund.color}
+                            strokeWidth="10"
+                            strokeDasharray={circumference}
+                            strokeDashoffset={offset}
+                            className="transition-all"
+                          />
+                        </svg>
+                        <p className="text-xs font-bold mt-1" style={{ color: fund.color }}>
+                          {fund.amount}%
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="space-y-1">
+                  {fundingSources.map((fund, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: fund.color }} />
+                      <span className="text-xs text-gray-700">{fund.source}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </Card>
 
