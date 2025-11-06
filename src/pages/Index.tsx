@@ -125,6 +125,25 @@ const Index = () => {
     },
   ];
 
+  const aiRecommendations = [
+    { area: 'ЖКХ', tip: 'Увеличить финансирование на 15% для предотвращения аварий', icon: 'Home' },
+    { area: 'Образование', tip: 'Запустить 2 новых кружка в ДК «Лидер»', icon: 'GraduationCap' },
+    { area: 'Дороги', tip: 'Приоритет — ул. Пушкина (макс. обращений)', icon: 'Car' },
+  ];
+
+  const biggestChanges = [
+    { indicator: 'Обращения граждан', value: '+250', percent: '+35%', trend: 'up' },
+    { indicator: 'Выполненных поручений', value: '+180', percent: '+42%', trend: 'up' },
+    { indicator: 'Аварийных ситуаций', value: '-120', percent: '-28%', trend: 'down' },
+  ];
+
+  const awaitingDocs = [
+    { name: 'Распоряжение №9842', status: 'ok', aiNote: 'Документ оформлен корректно' },
+    { name: 'Протокол совещания от 05.11', status: 'error', aiNote: 'Отсутствует подпись секретаря' },
+    { name: 'Отчёт по ГП «Безопасные дороги»', status: 'ok', aiNote: 'Готов к подписанию' },
+    { name: 'Смета на Q1 2025', status: 'warning', aiNote: 'Не указан источник финансирования' },
+  ];
+
   return (
     <div className="min-h-screen p-4 bg-gradient-to-br from-red-50 via-yellow-50 to-white">
       <div className="max-w-[1600px] mx-auto space-y-4">
@@ -151,6 +170,82 @@ const Index = () => {
             </div>
           </div>
         </header>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <Card className="glass rounded-3xl p-4 shadow-lg">
+            <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
+              <Icon name="Sparkles" className="text-yellow-600" size={28} />
+              ИИ-Рекомендации
+            </h2>
+            <div className="space-y-3">
+              {aiRecommendations.map((rec, index) => (
+                <div key={index} className="bg-yellow-50/50 rounded-xl p-3 border-2 border-yellow-400/30">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Icon name={rec.icon as any} size={18} className="text-yellow-600" />
+                    <h3 className="font-bold text-sm text-gray-900">{rec.area}</h3>
+                  </div>
+                  <p className="text-xs text-gray-700 flex items-start gap-1">
+                    <Icon name="Lightbulb" size={14} className="text-yellow-600 mt-0.5 flex-shrink-0" />
+                    {rec.tip}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <Card className="glass-red rounded-3xl p-4 shadow-lg">
+            <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
+              <Icon name="TrendingUp" className="text-red-600" size={28} />
+              Наибольшие изменения
+            </h2>
+            <div className="space-y-3">
+              {biggestChanges.map((change, index) => (
+                <div key={index} className="bg-white/60 rounded-xl p-3 border-2 border-red-400/30">
+                  <div className="flex items-center justify-between mb-1">
+                    <h3 className="font-semibold text-sm text-gray-900">{change.indicator}</h3>
+                    <Icon
+                      name={change.trend === 'up' ? 'ArrowUp' : 'ArrowDown'}
+                      size={18}
+                      className={change.trend === 'up' ? 'text-green-600' : 'text-red-600'}
+                    />
+                  </div>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-2xl font-bold text-red-600">{change.value}</span>
+                    <span className="text-sm font-semibold text-gray-600">{change.percent}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <Card className="glass rounded-3xl p-4 shadow-lg">
+            <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
+              <Icon name="FileSignature" className="text-red-500" size={28} />
+              Ожидание подписания
+            </h2>
+            <div className="space-y-2">
+              {awaitingDocs.map((doc, index) => (
+                <div key={index} className="bg-white/60 rounded-xl p-2 border-l-4"
+                  style={{
+                    borderLeftColor: doc.status === 'ok' ? '#22c55e' : doc.status === 'error' ? '#ef4444' : '#f59e0b'
+                  }}
+                >
+                  <h3 className="font-semibold text-xs text-gray-900 mb-1">{doc.name}</h3>
+                  <div className="flex items-start gap-1">
+                    <Icon
+                      name={doc.status === 'ok' ? 'CheckCircle' : doc.status === 'error' ? 'XCircle' : 'AlertCircle'}
+                      size={14}
+                      className={`mt-0.5 flex-shrink-0 ${
+                        doc.status === 'ok' ? 'text-green-600' : doc.status === 'error' ? 'text-red-600' : 'text-yellow-600'
+                      }`}
+                    />
+                    <p className="text-xs text-gray-700">{doc.aiNote}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <Card className="glass rounded-3xl p-6 shadow-lg">
