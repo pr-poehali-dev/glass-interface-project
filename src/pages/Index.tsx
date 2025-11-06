@@ -136,9 +136,7 @@ const Index = () => {
               className="h-16 w-16 object-contain"
             />
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                ИИ ПАНЕЛЬ организации общественно-политической работы
-              </h1>
+              <h1 className="text-3xl font-bold text-gray-900">ИИ ПАНЕЛЬ Дмитровского Муниципального округа</h1>
               <p className="text-sm text-gray-600">Дмитровский муниципальный округ</p>
             </div>
           </div>
