@@ -85,6 +85,39 @@ const Index = () => {
     },
   ];
 
+  const resources = [
+    {
+      group: 'Силами Администрации',
+      icon: 'Building2',
+      color: 'red',
+      events: [
+        'Организация субботников',
+        'Контроль качества дорог',
+        'Работа с обращениями граждан',
+      ],
+    },
+    {
+      group: 'Силами НКО',
+      icon: 'Users',
+      color: 'yellow',
+      events: [
+        'Помощь пожилым людям',
+        'Экологические акции',
+        'Благотворительные мероприятия',
+      ],
+    },
+    {
+      group: 'Силами Региона',
+      icon: 'MapPin',
+      color: 'blue',
+      events: [
+        'Строительство инфраструктуры',
+        'Финансирование программ',
+        'Межмуниципальные проекты',
+      ],
+    },
+  ];
+
   return (
     <div className="min-h-screen p-4 bg-gradient-to-br from-red-50 via-yellow-50 to-white">
       <div className="max-w-[1600px] mx-auto space-y-4">
@@ -182,34 +215,68 @@ const Index = () => {
           </div>
         </div>
 
-        <Card className="glass rounded-3xl p-6 shadow-lg">
-          <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <Icon name="FileText" className="text-red-500" size={24} />
-            Связь мероприятий Администрации с Госпрограммами
-          </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b-2 border-gray-300">
-                  <th className="text-left p-3 font-bold">Мероприятие</th>
-                  <th className="text-left p-3 font-bold">Эффект</th>
-                  <th className="text-left p-3 font-bold">Расходы</th>
-                  <th className="text-left p-3 font-bold">Госпрограмма</th>
-                </tr>
-              </thead>
-              <tbody>
-                {programs.map((prog, index) => (
-                  <tr key={index} className="border-b border-gray-200 hover:bg-yellow-50/30">
-                    <td className="p-3 font-semibold">{prog.event}</td>
-                    <td className="p-3 text-green-700">{prog.effect}</td>
-                    <td className="p-3 font-mono text-red-600">{prog.cost}</td>
-                    <td className="p-3 text-sm">{prog.program}</td>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <Card className="glass rounded-3xl p-6 shadow-lg lg:col-span-2">
+            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <Icon name="FileText" className="text-red-500" size={24} />
+              Связь мероприятий Администрации с Госпрограммами
+            </h2>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b-2 border-gray-300">
+                    <th className="text-left p-3 font-bold">Мероприятие</th>
+                    <th className="text-left p-3 font-bold">Эффект</th>
+                    <th className="text-left p-3 font-bold">Расходы</th>
+                    <th className="text-left p-3 font-bold">Госпрограмма</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Card>
+                </thead>
+                <tbody>
+                  {programs.map((prog, index) => (
+                    <tr key={index} className="border-b border-gray-200 hover:bg-yellow-50/30">
+                      <td className="p-3 font-semibold">{prog.event}</td>
+                      <td className="p-3 text-green-700">{prog.effect}</td>
+                      <td className="p-3 font-mono text-red-600">{prog.cost}</td>
+                      <td className="p-3 text-sm">{prog.program}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+
+          <Card className="glass rounded-3xl p-6 shadow-lg">
+            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <Icon name="PieChart" className="text-red-500" size={24} />
+              Распределение ресурсов
+            </h2>
+            <div className="space-y-4">
+              {resources.map((resource, index) => (
+                <div
+                  key={index}
+                  className={`glass-${resource.color === 'red' ? 'red' : resource.color === 'yellow' ? 'yellow' : ''} rounded-xl p-4 ${resource.color === 'blue' ? 'bg-blue-50/50 border-2 border-blue-300/30' : ''}`}
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <Icon
+                      name={resource.icon as any}
+                      size={20}
+                      className={`text-${resource.color}-600`}
+                    />
+                    <h3 className="font-bold text-gray-900">{resource.group}</h3>
+                  </div>
+                  <ul className="space-y-1.5">
+                    {resource.events.map((event, idx) => (
+                      <li key={idx} className="text-sm text-gray-700 flex items-start gap-2">
+                        <span className="text-xs mt-1">•</span>
+                        <span>{event}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           <Card className="glass rounded-3xl p-6 shadow-lg lg:col-span-2">
