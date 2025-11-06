@@ -6,331 +6,176 @@ import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [openDropdowns, setOpenDropdowns] = useState<string[]>([]);
-
-  const toggleDropdown = (name: string) => {
-    setOpenDropdowns((prev) =>
-      prev.includes(name) ? prev.filter((item) => item !== name) : [...prev, name]
-    );
-  };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setScrollPosition((prev) => (prev + 1) % 1000);
+      setScrollPosition((prev) => (prev + 1) % 2000);
     }, 30);
     return () => clearInterval(interval);
   }, []);
 
-  const investProjects = [
-    { name: 'Строительство спорткомплекса', progress: 85, emoji: '🏋️', sources: ['Регион 45%', 'Федерация 40%', 'Местный 15%'] },
-    { name: 'Реконструкция школы №3', progress: 62, emoji: '🏫', sources: ['Регион 60%', 'Местный 40%'] },
-    { name: 'Парковая зона «Зелёный остров»', progress: 40, emoji: '🌳', sources: ['Федерация 70%', 'Местный 30%'] },
-    { name: 'Модернизация теплосетей', progress: 95, emoji: '🔥', sources: ['Регион 55%', 'Федерация 45%'] },
-  ];
-
-  const fundingSources = [
-    { source: 'Региональный бюджет', amount: 52, color: '#ef4444' },
-    { source: 'Федеральный бюджет', amount: 32, color: '#fbbf24' },
-    { source: 'Местный бюджет', amount: 16, color: '#60a5fa' },
+  const wordCloud = [
+    { text: 'Отопление', size: 52, weight: 900 },
+    { text: 'Дороги', size: 36, weight: 700 },
+    { text: 'Благоустройство', size: 30, weight: 600 },
+    { text: 'Водоснабжение', size: 26, weight: 600 },
+    { text: 'Освещение', size: 32, weight: 700 },
+    { text: 'Транспорт', size: 28, weight: 600 },
+    { text: 'Здравоохранение', size: 24, weight: 500 },
+    { text: 'Образование', size: 26, weight: 600 },
+    { text: 'ЖКХ', size: 38, weight: 700 },
+    { text: 'Экология', size: 24, weight: 500 },
   ];
 
   const tasks = [
     {
       title: 'Контроль подачи тепла в жилой фонд',
       deadline: 'До 18:00',
-      aiTip: 'Свяжитесь с начальником теплосетей в 14:00 - оптимальное время для оперативного решения',
+      aiTip: '💡 Свяжитесь с начальником теплосетей в 14:00 - оптимальное время для оперативного решения',
       priority: 'high',
     },
     {
       title: 'Согласование проекта благоустройства парка',
       deadline: 'До 16:00',
-      aiTip: 'Рекомендую начать с отдела архитектуры, затем экологическая экспертиза',
+      aiTip: '💡 Рекомендую начать с отдела архитектуры, затем экологическая экспертиза',
       priority: 'medium',
     },
     {
       title: 'Встреча с представителями НКО',
       deadline: '15:30',
-      aiTip: 'Подготовлены материалы по 3 активным проектам, акцент на волонтёрское движение',
+      aiTip: '💡 Подготовлены материалы по 3 активным проектам, акцент на волонтёрское движение',
       priority: 'medium',
     },
   ];
 
   const comments = [
-    '🔥 Сергей П.: Спасибо за оперативное решение вопроса с отоплением!',
-    '💬 Анна М.: Когда отремонтируют дорогу на ул. Пушкина?',
-    '📱 Группа ВК "Дмитров": Новая детская площадка радует жителей!',
-    '⭐ Ольга К.: Отличная работа по уборке снега!',
-    '📢 Telegram-канал: Запущен опрос по благоустройству центра',
+    '🔥 Сергей П.: Спасибо за оперативное решение вопроса с отоплением на ул. Профессиональной!',
+    '💬 Анна М.: Когда отремонтируют дорогу на ул. Пушкина? Ямы становятся всё глубже...',
+    '📱 Группа ВК "Дмитров": Новая детская площадка в микрорайоне Внуково радует жителей!',
+    '⭐ Ольга К.: Отличная работа по уборке снега в этом сезоне. Молодцы!',
+    '📢 Telegram-канал: Запущен опрос по благоустройству центральной площади города',
+    '🏫 Родители школы №3: Рады, что началась реконструкция! Ждём с нетерпением',
   ];
 
   const programs = [
     {
-      event: 'Ремонт дорог',
-      effect: '+15% качество дорожного покрытия',
+      event: 'Ремонт дорожного покрытия',
+      effect: '+15% качество покрытия',
       cost: '12.5 млн ₽',
       program: 'Безопасные дороги 2024',
+      icon: 'Car',
     },
     {
       event: 'Модернизация теплосетей',
       effect: '-20% потери тепла',
       cost: '8.3 млн ₽',
       program: 'Энергоэффективность ЖКХ',
+      icon: 'Flame',
     },
     {
-      event: 'Строительство детских площадок',
+      event: 'Детские площадки',
       effect: '+5 новых объектов',
       cost: '3.2 млн ₽',
-      program: 'Комфортная городская среда',
+      program: 'Комфортная среда',
+      icon: 'Trees',
     },
     {
-      event: 'Развитие волонтёрского движения',
-      effect: '+200 активных участников',
+      event: 'Волонтёрское движение',
+      effect: '+200 участников',
       cost: '1.1 млн ₽',
-      program: 'Социальная поддержка НКО',
+      program: 'Поддержка НКО',
+      icon: 'Heart',
     },
   ];
 
-  const resources = [
-    {
-      group: 'Силами Администрации',
-      icon: 'Building2',
-      color: 'red',
-      events: [
-        'Организация субботников',
-        'Контроль качества дорог',
-        'Работа с обращениями граждан',
-      ],
-    },
-    {
-      group: 'Силами НКО',
-      icon: 'Users',
-      color: 'yellow',
-      events: [
-        'Помощь пожилым людям',
-        'Экологические акции',
-        'Благотворительные мероприятия',
-      ],
-    },
-    {
-      group: 'Силами Региона',
-      icon: 'MapPin',
-      color: 'blue',
-      events: [
-        'Строительство инфраструктуры',
-        'Финансирование программ',
-        'Межмуниципальные проекты',
-      ],
-    },
+  const mapInteractions = [
+    { label: 'Камера района', icon: 'Video', color: 'red' },
+    { label: 'Подключить НКО', icon: 'Users', color: 'yellow' },
+    { label: 'Сформировать решение', icon: 'FileCheck', color: 'blue' },
+    { label: 'Карта объектов', icon: 'MapPin', color: 'green' },
+    { label: 'Статистика района', icon: 'BarChart3', color: 'purple' },
   ];
 
-  const aiRecommendations = [
-    { area: 'ЖКХ', tip: 'Увеличить финансирование на 15% для предотвращения аварий', icon: 'Home' },
-    { area: 'Образование', tip: 'Запустить 2 новых кружка в ДК «Лидер»', icon: 'GraduationCap' },
-    { area: 'Дороги', tip: 'Приоритет — ул. Пушкина (макс. обращений)', icon: 'Car' },
-  ];
-
-  const biggestChanges = [
-    { indicator: 'Обращения граждан', value: '+250', percent: '+35%', trend: 'up' },
-    { indicator: 'Выполненных поручений', value: '+180', percent: '+42%', trend: 'up' },
-    { indicator: 'Аварийных ситуаций', value: '-120', percent: '-28%', trend: 'down' },
-  ];
-
-  const awaitingDocs = [
-    { name: 'Распоряжение №9842', status: 'ok', aiNote: 'Документ оформлен корректно' },
-    { name: 'Протокол совещания от 05.11', status: 'error', aiNote: 'Отсутствует подпись секретаря' },
-    { name: 'Отчёт по ГП «Безопасные дороги»', status: 'ok', aiNote: 'Готов к подписанию' },
-    { name: 'Смета на Q1 2025', status: 'warning', aiNote: 'Не указан источник финансирования' },
+  const mapPoints = [
+    { name: 'Дмитров центр', x: 50, y: 45, icon: '🏛️', type: 'admin' },
+    { name: 'Школа №3', x: 65, y: 55, icon: '🏫', type: 'education' },
+    { name: 'Парк', x: 35, y: 60, icon: '🌳', type: 'nature' },
+    { name: 'Поликлиника', x: 45, y: 30, icon: '🏥', type: 'health' },
+    { name: 'ТЦ', x: 60, y: 40, icon: '🛒', type: 'commercial' },
   ];
 
   return (
     <div className="min-h-screen p-4 bg-gradient-to-br from-red-50 via-yellow-50 to-white">
-      <div className="max-w-[1600px] mx-auto space-y-4">
-        <header className="glass rounded-3xl p-4 shadow-lg flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <img
-              src="https://cdn.poehali.dev/files/d2a47e15-1034-4d6f-9164-35ef20ee16ad.png"
-              alt="Герб Дмитрова"
-              className="h-16 w-16 object-contain"
-            />
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">ИИ ПАНЕЛЬ Дмитровского Муниципального округа</h1>
-              <p className="text-sm text-gray-600">Сводные данные по всей Администрации</p>
+      <div className="max-w-[1800px] mx-auto space-y-4">
+        <header className="glass rounded-3xl p-4 shadow-lg">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-4">
+              <img
+                src="https://cdn.poehali.dev/files/d2a47e15-1034-4d6f-9164-35ef20ee16ad.png"
+                alt="Герб Дмитрова"
+                className="h-20 w-auto object-contain"
+              />
+              <div>
+                <h1 className="text-4xl font-bold text-gray-900 mb-1">
+                  ИИ ПАНЕЛЬ организации общественно-политической работы
+                </h1>
+                <p className="text-sm text-gray-600">Дмитровский муниципальный округ</p>
+              </div>
+            </div>
+
+            <div className="glass-red rounded-2xl p-3 flex items-center gap-3">
+              <div className="w-14 h-14 bg-red-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                ЗГ
+              </div>
+              <div className="text-right">
+                <p className="font-bold text-gray-900">Иван Петров</p>
+                <p className="text-xs text-gray-600">Заместитель Главы Администрации</p>
+              </div>
             </div>
           </div>
 
-          <div className="glass-red rounded-2xl p-3 flex items-center gap-3">
-            <div className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
-              ЗГ
-            </div>
-            <div className="text-right">
-              <p className="font-semibold text-gray-900">Заместитель Главы</p>
-              <p className="text-xs text-gray-600">Администрации</p>
+          <div className="bg-gradient-to-r from-red-500 via-yellow-500 to-red-500 p-3 rounded-xl overflow-hidden relative border-2 border-black/10">
+            <div
+              className="flex gap-8 whitespace-nowrap"
+              style={{
+                transform: `translateX(-${scrollPosition}px)`,
+                transition: 'transform 0.05s linear',
+              }}
+            >
+              {[...comments, ...comments].map((comment, idx) => (
+                <span key={idx} className="text-white font-semibold text-sm">
+                  {comment}
+                </span>
+              ))}
             </div>
           </div>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <Card className="glass rounded-3xl p-4 shadow-lg">
-            <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
-              <Icon name="Sparkles" className="text-yellow-600" size={28} />
-              ИИ-Рекомендации
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <Card className="glass rounded-3xl p-6 shadow-lg border-2 border-red-200">
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <Icon name="MessageSquare" className="text-red-500" size={28} />
+              Облако обращений граждан
             </h2>
-            <div className="space-y-3">
-              {aiRecommendations.map((rec, index) => (
-                <div key={index} className="bg-yellow-50/50 rounded-xl p-3 border-2 border-yellow-400/30">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Icon name={rec.icon as any} size={18} className="text-yellow-600" />
-                    <h3 className="font-bold text-sm text-gray-900">{rec.area}</h3>
-                  </div>
-                  <p className="text-xs text-gray-700 flex items-start gap-1">
-                    <Icon name="Lightbulb" size={14} className="text-yellow-600 mt-0.5 flex-shrink-0" />
-                    {rec.tip}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </Card>
-
-          <Card className="glass-red rounded-3xl p-4 shadow-lg">
-            <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
-              <Icon name="TrendingUp" className="text-red-600" size={28} />
-              Наибольшие изменения
-            </h2>
-            <div className="space-y-3">
-              {biggestChanges.map((change, index) => (
-                <div key={index} className="bg-white/60 rounded-xl p-3 border-2 border-red-400/30">
-                  <div className="flex items-center justify-between mb-1">
-                    <h3 className="font-semibold text-sm text-gray-900">{change.indicator}</h3>
-                    <Icon
-                      name={change.trend === 'up' ? 'ArrowUp' : 'ArrowDown'}
-                      size={18}
-                      className={change.trend === 'up' ? 'text-green-600' : 'text-red-600'}
-                    />
-                  </div>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-bold text-red-600">{change.value}</span>
-                    <span className="text-sm font-semibold text-gray-600">{change.percent}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Card>
-
-          <Card className="glass rounded-3xl p-4 shadow-lg">
-            <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
-              <Icon name="FileSignature" className="text-red-500" size={28} />
-              Ожидание подписания
-            </h2>
-            <div className="space-y-2">
-              {awaitingDocs.map((doc, index) => (
-                <div key={index} className="bg-white/60 rounded-xl p-2 border-l-4"
+            <div className="flex flex-wrap items-center justify-center gap-4 p-8 bg-gradient-to-br from-red-50/50 to-yellow-50/50 rounded-2xl min-h-[280px] border-2 border-black/5">
+              {wordCloud.map((word, index) => (
+                <span
+                  key={index}
+                  className="cursor-pointer transition-all hover:scale-110 hover:text-red-700 select-none"
                   style={{
-                    borderLeftColor: doc.status === 'ok' ? '#22c55e' : doc.status === 'error' ? '#ef4444' : '#f59e0b'
+                    fontSize: `${word.size}px`,
+                    fontWeight: word.weight,
+                    color: word.size > 40 ? '#dc2626' : word.size > 30 ? '#f59e0b' : '#6b7280',
+                    textShadow: word.size > 40 ? '2px 2px 4px rgba(0,0,0,0.1)' : 'none',
                   }}
                 >
-                  <h3 className="font-semibold text-xs text-gray-900 mb-1">{doc.name}</h3>
-                  <div className="flex items-start gap-1">
-                    <Icon
-                      name={doc.status === 'ok' ? 'CheckCircle' : doc.status === 'error' ? 'XCircle' : 'AlertCircle'}
-                      size={14}
-                      className={`mt-0.5 flex-shrink-0 ${
-                        doc.status === 'ok' ? 'text-green-600' : doc.status === 'error' ? 'text-red-600' : 'text-yellow-600'
-                      }`}
-                    />
-                    <p className="text-xs text-gray-700">{doc.aiNote}</p>
-                  </div>
-                </div>
+                  {word.text}
+                </span>
               ))}
             </div>
           </Card>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <Card className="glass rounded-3xl p-6 shadow-lg">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-              <Icon name="TrendingUp" className="text-red-500" size={28} />
-              Реализация инвестпроектов
-            </h2>
-            <div className="space-y-4">
-              <div className="space-y-3">
-                {investProjects.map((project, index) => (
-                  <div key={index} className="bg-white/60 rounded-xl p-3 border-2 border-gray-200">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-2xl">{project.emoji}</span>
-                        <h3 className="font-semibold text-sm text-gray-900">{project.name}</h3>
-                      </div>
-                      <span className="text-lg font-bold text-red-600">{project.progress}%</span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
-                      <div
-                        className="h-3 rounded-full bg-gradient-to-r from-red-500 to-yellow-500 transition-all"
-                        style={{ width: `${project.progress}%` }}
-                      />
-                    </div>
-                    <div className="flex flex-wrap gap-1">
-                      {project.sources.map((source, idx) => (
-                        <span key={idx} className="text-xs bg-gray-100 px-2 py-0.5 rounded-full text-gray-700">
-                          {source}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="bg-gradient-to-br from-red-50/50 to-yellow-50/50 rounded-2xl p-4">
-                <h3 className="font-bold text-sm mb-3 text-center">Источники финансирования</h3>
-                <div className="flex items-center justify-center gap-4 mb-3">
-                  {fundingSources.map((fund, index) => {
-                    const radius = 45;
-                    const circumference = 2 * Math.PI * radius;
-                    const offset = circumference - (fund.amount / 100) * circumference;
-                    const rotate = index === 0 ? 0 : fundingSources.slice(0, index).reduce((sum, f) => sum + (f.amount / 100) * 360, 0);
-                    
-                    return (
-                      <div key={index} className="text-center">
-                        <svg width="100" height="100" className="transform -rotate-90">
-                          <circle
-                            cx="50"
-                            cy="50"
-                            r={radius}
-                            fill="none"
-                            stroke="#e5e7eb"
-                            strokeWidth="10"
-                          />
-                          <circle
-                            cx="50"
-                            cy="50"
-                            r={radius}
-                            fill="none"
-                            stroke={fund.color}
-                            strokeWidth="10"
-                            strokeDasharray={circumference}
-                            strokeDashoffset={offset}
-                            className="transition-all"
-                          />
-                        </svg>
-                        <p className="text-xs font-bold mt-1" style={{ color: fund.color }}>
-                          {fund.amount}%
-                        </p>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="space-y-1">
-                  {fundingSources.map((fund, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: fund.color }} />
-                      <span className="text-xs text-gray-700">{fund.source}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="glass-yellow rounded-3xl p-6 shadow-lg">
+          <Card className="glass-yellow rounded-3xl p-6 shadow-lg border-2 border-yellow-200">
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <Icon name="ClipboardList" className="text-yellow-600" size={28} />
               Поручения главы
@@ -339,20 +184,26 @@ const Index = () => {
               {tasks.map((task, index) => (
                 <div
                   key={index}
-                  className="bg-white/80 rounded-xl p-4 border-l-4"
-                  style={{
-                    borderLeftColor: task.priority === 'high' ? '#ef4444' : '#fbbf24',
-                  }}
+                  className={`rounded-xl p-4 border-2 ${
+                    task.priority === 'high'
+                      ? 'bg-red-50/80 border-red-400'
+                      : 'bg-yellow-50/60 border-yellow-400'
+                  }`}
                 >
                   <div className="flex items-start justify-between mb-2">
-                    <h3 className="font-semibold text-gray-900">{task.title}</h3>
-                    <Badge variant="outline" className="text-xs">
+                    <h3 className="font-bold text-sm text-gray-900 flex-1">{task.title}</h3>
+                    <Badge
+                      className={`ml-2 ${
+                        task.priority === 'high'
+                          ? 'bg-red-500 text-white'
+                          : 'bg-yellow-500 text-white'
+                      }`}
+                    >
                       {task.deadline}
                     </Badge>
                   </div>
-                  <div className="flex items-start gap-2 text-sm text-gray-700 bg-yellow-50/50 p-2 rounded-lg">
-                    <Icon name="Lightbulb" size={16} className="text-yellow-600 mt-0.5 flex-shrink-0" />
-                    <p className="text-xs">{task.aiTip}</p>
+                  <div className="bg-white/70 rounded-lg p-2 border border-gray-300">
+                    <p className="text-xs text-gray-800">{task.aiTip}</p>
                   </div>
                 </div>
               ))}
@@ -360,187 +211,127 @@ const Index = () => {
           </Card>
         </div>
 
-        <div className="glass rounded-3xl p-4 shadow-lg overflow-hidden">
-          <div
-            className="flex gap-8 whitespace-nowrap animate-marquee"
-            style={{
-              transform: `translateX(-${scrollPosition}px)`,
-            }}
-          >
-            {[...comments, ...comments, ...comments].map((comment, index) => (
-              <span key={index} className="text-sm font-medium text-gray-800">
-                {comment}
-              </span>
+        <Card className="glass rounded-3xl p-6 shadow-lg border-2 border-yellow-200">
+          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+            <Icon name="Target" className="text-red-600" size={28} />
+            Связь мероприятий Администрации с Госпрограммами
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {programs.map((prog, index) => (
+              <div
+                key={index}
+                className="bg-gradient-to-br from-white to-yellow-50/40 rounded-2xl p-4 border-2 border-black/10 hover:border-red-400 transition-all"
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center">
+                    <Icon name={prog.icon as any} className="text-white" size={20} />
+                  </div>
+                  <h3 className="font-bold text-sm text-gray-900">{prog.event}</h3>
+                </div>
+                <div className="space-y-2 text-xs">
+                  <div className="flex items-center gap-1">
+                    <Icon name="TrendingUp" size={14} className="text-green-600" />
+                    <span className="text-gray-700">{prog.effect}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Icon name="Wallet" size={14} className="text-yellow-600" />
+                    <span className="font-semibold text-gray-900">{prog.cost}</span>
+                  </div>
+                  <div className="bg-red-100 rounded-lg p-2 border border-red-300 mt-2">
+                    <p className="font-semibold text-red-700 text-xs">{prog.program}</p>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
-        </div>
+        </Card>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <Card className="glass rounded-3xl p-6 shadow-lg">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <Card className="lg:col-span-2 glass rounded-3xl p-6 shadow-lg border-2 border-red-200">
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-              <Icon name="FileText" className="text-red-500" size={28} />
-              Связь мероприятий Администрации с Госпрограммами
-            </h2>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b-2 border-gray-300">
-                    <th className="text-left p-3 font-bold">Мероприятие</th>
-                    <th className="text-left p-3 font-bold">Эффект</th>
-                    <th className="text-left p-3 font-bold">Расходы</th>
-                    <th className="text-left p-3 font-bold">Госпрограмма</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {programs.map((prog, index) => (
-                    <tr key={index} className="border-b border-gray-200 hover:bg-yellow-50/30">
-                      <td className="p-3 font-semibold">{prog.event}</td>
-                      <td className="p-3 text-green-700">{prog.effect}</td>
-                      <td className="p-3 font-mono text-red-600">{prog.cost}</td>
-                      <td className="p-3 text-sm">{prog.program}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </Card>
-
-          <Card className="glass-yellow rounded-3xl p-6 shadow-lg">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-              <Icon name="Wand2" className="text-yellow-600" size={28} />
-              Конструктор событий
-            </h2>
-            <div className="space-y-3">
-              {[
-                { name: 'Документы', icon: 'FileText', items: ['Распоряжения', 'Протоколы', 'Отчёты'] },
-                { name: 'Обращения', icon: 'MessageSquare', items: ['Жалобы', 'Предложения', 'Запросы'] },
-                { name: 'События', icon: 'Calendar', items: ['Мероприятия', 'Встречи', 'Форумы'] },
-                { name: 'Программы', icon: 'BookOpen', items: ['Госпрограммы', 'Нацпроекты', 'Региональные'] },
-                { name: 'Нацпроекты', icon: 'Flag', items: ['Образование', 'Здравоохранение', 'Экология'] },
-                { name: 'Участники', icon: 'Users', items: ['Администрация', 'НКО', 'Жители'] },
-              ].map((section) => (
-                <div key={section.name} className="bg-white/60 rounded-xl overflow-hidden border-2 border-yellow-400/30">
-                  <button
-                    onClick={() => toggleDropdown(section.name)}
-                    className="w-full flex items-center justify-between p-3 hover:bg-yellow-50/50 transition-colors"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Icon name={section.icon as any} size={18} className="text-yellow-600" />
-                      <span className="font-semibold text-gray-900">{section.name}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs bg-yellow-500 text-white px-2 py-0.5 rounded-full font-bold">+</span>
-                      <Icon
-                        name={openDropdowns.includes(section.name) ? 'ChevronUp' : 'ChevronDown'}
-                        size={18}
-                        className="text-gray-600"
-                      />
-                    </div>
-                  </button>
-                  {openDropdowns.includes(section.name) && (
-                    <div className="px-3 pb-3 space-y-1.5 bg-yellow-50/30">
-                      {section.items.map((item, idx) => (
-                        <label key={idx} className="flex items-center gap-2 cursor-pointer hover:bg-white/60 p-2 rounded-lg">
-                          <input type="checkbox" className="rounded border-yellow-500 text-yellow-600 focus:ring-yellow-500" />
-                          <span className="text-sm text-gray-700">{item}</span>
-                        </label>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <Button className="w-full mt-4 bg-red-500 hover:bg-red-600 text-white rounded-xl">
-              Создать событие
-            </Button>
-          </Card>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-          <Card className="glass rounded-3xl p-4 shadow-lg">
-            <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
-              <Icon name="PieChart" className="text-red-500" size={28} />
-              Ресурсы
-            </h2>
-            <div className="space-y-2">
-              {resources.map((resource, index) => (
-                <div
-                  key={index}
-                  className={`glass-${resource.color === 'red' ? 'red' : resource.color === 'yellow' ? 'yellow' : ''} rounded-xl p-2 ${resource.color === 'blue' ? 'bg-blue-50/50 border-2 border-blue-300/30' : ''}`}
-                >
-                  <div className="flex items-center gap-1.5 mb-1">
-                    <Icon
-                      name={resource.icon as any}
-                      size={16}
-                      className={`text-${resource.color}-600`}
-                    />
-                    <h3 className="font-bold text-sm text-gray-900">{resource.group}</h3>
-                  </div>
-                  <ul className="space-y-0.5">
-                    {resource.events.map((event, idx) => (
-                      <li key={idx} className="text-xs text-gray-700 flex items-start gap-1">
-                        <span className="text-xs">•</span>
-                        <span>{event}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </Card>
-
-          <Card className="glass rounded-3xl p-4 shadow-lg lg:col-span-3">
-            <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
-              <Icon name="Map" className="text-red-500" size={28} />
+              <Icon name="Map" className="text-red-600" size={28} />
               Интерактивная карта МО
             </h2>
-            <div className="relative bg-gradient-to-br from-green-100 to-blue-100 rounded-2xl overflow-hidden">
+            <div className="relative bg-gradient-to-br from-cyan-100 to-green-100 rounded-2xl overflow-hidden border-2 border-black/10">
               <img
                 src="https://cdn.poehali.dev/files/3da2226d-31fa-41d9-baec-500a1c553955.jpg"
-                alt="Карта Дмитровского округа"
-                className="w-full h-[400px] object-cover"
+                alt="Карта Дмитровского района"
+                className="w-full h-auto opacity-90"
               />
-              <div className="absolute top-4 left-4 glass rounded-xl p-2">
-                <Icon name="MapPin" className="text-red-500" size={20} />
-              </div>
-              <div className="absolute top-20 right-12 glass-yellow rounded-xl p-2">
-                <Icon name="Building" className="text-yellow-600" size={20} />
-              </div>
-              <div className="absolute bottom-16 left-20 glass-red rounded-xl p-2">
-                <Icon name="AlertCircle" className="text-red-600" size={20} />
-              </div>
-              <div className="absolute top-32 left-32 glass rounded-xl p-2">
-                <Icon name="School" className="text-blue-600" size={20} />
+
+              {mapPoints.map((point, idx) => (
+                <div
+                  key={idx}
+                  className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
+                  style={{ left: `${point.x}%`, top: `${point.y}%` }}
+                >
+                  <div className="relative">
+                    <div className="text-3xl animate-bounce hover:scale-125 transition-transform">
+                      {point.icon}
+                    </div>
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-black/80 text-white px-2 py-1 rounded text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                      {point.name}
+                    </div>
+                    {idx < 3 && (
+                      <svg className="absolute top-1/2 left-1/2 w-32 h-32 pointer-events-none -z-10">
+                        <line
+                          x1="0"
+                          y1="0"
+                          x2={idx === 0 ? 60 : idx === 1 ? -40 : 30}
+                          y2={idx === 0 ? 40 : idx === 1 ? 30 : -20}
+                          stroke="#ef4444"
+                          strokeWidth="2"
+                          strokeDasharray="5,5"
+                          className="animate-pulse"
+                        />
+                      </svg>
+                    )}
+                  </div>
+                </div>
+              ))}
+
+              <div className="absolute top-3 left-3 bg-white/90 rounded-xl p-2 border-2 border-black/10">
+                <p className="text-xs font-bold text-gray-900">📍 Точки интересов</p>
               </div>
             </div>
           </Card>
 
-          <Card className="glass rounded-3xl p-4 shadow-lg">
-            <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
-              <Icon name="Settings" className="text-red-500" size={28} />
-              Опции
+          <Card className="glass-yellow rounded-3xl p-6 shadow-lg border-2 border-yellow-200">
+            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <Icon name="Settings" className="text-yellow-600" size={24} />
+              Опции взаимодействия
             </h2>
-            <div className="space-y-2">
-              <Button className="w-full bg-red-500 hover:bg-red-600 text-white rounded-xl flex items-center gap-2 text-sm py-2">
-                <Icon name="Camera" size={16} />
-                Камеры
-              </Button>
-              <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 rounded-xl flex items-center gap-2 text-sm py-2">
-                <Icon name="Users" size={16} />
-                НКО
-              </Button>
-              <Button className="w-full bg-white hover:bg-gray-100 text-gray-900 border-2 border-black rounded-xl flex items-center gap-2 text-sm py-2">
-                <Icon name="FileCheck" size={16} />
-                Решение
-              </Button>
-              <Button className="w-full bg-white hover:bg-gray-100 text-gray-900 border-2 border-black rounded-xl flex items-center gap-2 text-sm py-2">
-                <Icon name="TrendingUp" size={16} />
-                Прогноз
-              </Button>
-              <Button className="w-full bg-white hover:bg-gray-100 text-gray-900 border-2 border-black rounded-xl flex items-center gap-2 text-sm py-2">
-                <Icon name="Share2" size={16} />
-                Данные
-              </Button>
+            <div className="space-y-3">
+              {mapInteractions.map((option, index) => (
+                <Button
+                  key={index}
+                  className={`w-full justify-start gap-3 bg-gradient-to-r ${
+                    option.color === 'red'
+                      ? 'from-red-500 to-red-600 hover:from-red-600 hover:to-red-700'
+                      : option.color === 'yellow'
+                      ? 'from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700'
+                      : option.color === 'blue'
+                      ? 'from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700'
+                      : option.color === 'green'
+                      ? 'from-green-500 to-green-600 hover:from-green-600 hover:to-green-700'
+                      : 'from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700'
+                  } text-white font-semibold border-2 border-black/10`}
+                >
+                  <Icon name={option.icon as any} size={20} />
+                  {option.label}
+                </Button>
+              ))}
+            </div>
+
+            <div className="mt-6 bg-gradient-to-br from-red-50 to-yellow-50 rounded-xl p-4 border-2 border-black/10">
+              <div className="flex items-center gap-2 mb-2">
+                <Icon name="Sparkles" className="text-yellow-600" size={20} />
+                <h3 className="font-bold text-sm">ИИ-Прогноз</h3>
+              </div>
+              <p className="text-xs text-gray-700">
+                💡 Рекомендуется подключить НКО "Экология" к проекту парковой зоны - это ускорит
+                реализацию на 15%
+              </p>
             </div>
           </Card>
         </div>
