@@ -136,7 +136,7 @@ const Index = () => {
               className="h-16 w-16 object-contain"
             />
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">
+              <h1 className="text-3xl font-bold text-gray-900">
                 ИИ ПАНЕЛЬ организации общественно-политической работы
               </h1>
               <p className="text-sm text-gray-600">Дмитровский муниципальный округ</p>
@@ -156,8 +156,8 @@ const Index = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <Card className="glass rounded-3xl p-6 shadow-lg">
-            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-              <Icon name="MessageSquare" className="text-red-500" size={24} />
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <Icon name="MessageSquare" className="text-red-500" size={28} />
               Облако обращений граждан
             </h2>
             <div className="flex flex-wrap items-center justify-center gap-4 p-8 bg-gradient-to-br from-red-50/50 to-yellow-50/50 rounded-2xl min-h-[280px]">
@@ -178,8 +178,8 @@ const Index = () => {
           </Card>
 
           <Card className="glass-yellow rounded-3xl p-6 shadow-lg">
-            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-              <Icon name="ClipboardList" className="text-yellow-600" size={24} />
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <Icon name="ClipboardList" className="text-yellow-600" size={28} />
               Поручения главы
             </h2>
             <div className="space-y-3">
@@ -224,8 +224,8 @@ const Index = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <Card className="glass rounded-3xl p-6 shadow-lg">
-            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-              <Icon name="FileText" className="text-red-500" size={24} />
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <Icon name="FileText" className="text-red-500" size={28} />
               Связь мероприятий Администрации с Госпрограммами
             </h2>
             <div className="overflow-x-auto">
@@ -253,8 +253,8 @@ const Index = () => {
           </Card>
 
           <Card className="glass-yellow rounded-3xl p-6 shadow-lg">
-            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-              <Icon name="Wand2" className="text-yellow-600" size={24} />
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <Icon name="Wand2" className="text-yellow-600" size={28} />
               Конструктор событий
             </h2>
             <div className="space-y-3">
@@ -303,31 +303,30 @@ const Index = () => {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-
-          <Card className="glass rounded-3xl p-6 shadow-lg lg:col-span-1">
-            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-              <Icon name="PieChart" className="text-red-500" size={24} />
-              Распределение ресурсов
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+          <Card className="glass rounded-3xl p-4 shadow-lg">
+            <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
+              <Icon name="PieChart" className="text-red-500" size={28} />
+              Ресурсы
             </h2>
-            <div className="space-y-4">
+            <div className="space-y-2">
               {resources.map((resource, index) => (
                 <div
                   key={index}
-                  className={`glass-${resource.color === 'red' ? 'red' : resource.color === 'yellow' ? 'yellow' : ''} rounded-xl p-4 ${resource.color === 'blue' ? 'bg-blue-50/50 border-2 border-blue-300/30' : ''}`}
+                  className={`glass-${resource.color === 'red' ? 'red' : resource.color === 'yellow' ? 'yellow' : ''} rounded-xl p-2 ${resource.color === 'blue' ? 'bg-blue-50/50 border-2 border-blue-300/30' : ''}`}
                 >
-                  <div className="flex items-center gap-2 mb-3">
+                  <div className="flex items-center gap-1.5 mb-1">
                     <Icon
                       name={resource.icon as any}
-                      size={20}
+                      size={16}
                       className={`text-${resource.color}-600`}
                     />
-                    <h3 className="font-bold text-gray-900">{resource.group}</h3>
+                    <h3 className="font-bold text-sm text-gray-900">{resource.group}</h3>
                   </div>
-                  <ul className="space-y-1.5">
+                  <ul className="space-y-0.5">
                     {resource.events.map((event, idx) => (
-                      <li key={idx} className="text-sm text-gray-700 flex items-start gap-2">
-                        <span className="text-xs mt-1">•</span>
+                      <li key={idx} className="text-xs text-gray-700 flex items-start gap-1">
+                        <span className="text-xs">•</span>
                         <span>{event}</span>
                       </li>
                     ))}
@@ -336,12 +335,10 @@ const Index = () => {
               ))}
             </div>
           </Card>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <Card className="glass rounded-3xl p-6 shadow-lg lg:col-span-2">
-            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-              <Icon name="Map" className="text-red-500" size={24} />
+          <Card className="glass rounded-3xl p-4 shadow-lg lg:col-span-3">
+            <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
+              <Icon name="Map" className="text-red-500" size={28} />
               Интерактивная карта МО
             </h2>
             <div className="relative bg-gradient-to-br from-green-100 to-blue-100 rounded-2xl overflow-hidden">
@@ -365,28 +362,31 @@ const Index = () => {
             </div>
           </Card>
 
-          <Card className="glass rounded-3xl p-6 shadow-lg">
-            <h2 className="text-xl font-bold mb-4">Опции</h2>
-            <div className="space-y-3">
-              <Button className="w-full bg-red-500 hover:bg-red-600 text-white rounded-xl flex items-center gap-2">
-                <Icon name="Camera" size={20} />
-                Камеры района
+          <Card className="glass rounded-3xl p-4 shadow-lg">
+            <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
+              <Icon name="Settings" className="text-red-500" size={28} />
+              Опции
+            </h2>
+            <div className="space-y-2">
+              <Button className="w-full bg-red-500 hover:bg-red-600 text-white rounded-xl flex items-center gap-2 text-sm py-2">
+                <Icon name="Camera" size={16} />
+                Камеры
               </Button>
-              <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 rounded-xl flex items-center gap-2">
-                <Icon name="Users" size={20} />
-                Подключить НКО
+              <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 rounded-xl flex items-center gap-2 text-sm py-2">
+                <Icon name="Users" size={16} />
+                НКО
               </Button>
-              <Button className="w-full bg-white hover:bg-gray-100 text-gray-900 border-2 border-black rounded-xl flex items-center gap-2">
-                <Icon name="FileCheck" size={20} />
-                Сформировать решение
+              <Button className="w-full bg-white hover:bg-gray-100 text-gray-900 border-2 border-black rounded-xl flex items-center gap-2 text-sm py-2">
+                <Icon name="FileCheck" size={16} />
+                Решение
               </Button>
-              <Button className="w-full bg-white hover:bg-gray-100 text-gray-900 border-2 border-black rounded-xl flex items-center gap-2">
-                <Icon name="TrendingUp" size={20} />
-                Прогноз событий
+              <Button className="w-full bg-white hover:bg-gray-100 text-gray-900 border-2 border-black rounded-xl flex items-center gap-2 text-sm py-2">
+                <Icon name="TrendingUp" size={16} />
+                Прогноз
               </Button>
-              <Button className="w-full bg-white hover:bg-gray-100 text-gray-900 border-2 border-black rounded-xl flex items-center gap-2">
-                <Icon name="Share2" size={20} />
-                Поделиться данными
+              <Button className="w-full bg-white hover:bg-gray-100 text-gray-900 border-2 border-black rounded-xl flex items-center gap-2 text-sm py-2">
+                <Icon name="Share2" size={16} />
+                Данные
               </Button>
             </div>
           </Card>
