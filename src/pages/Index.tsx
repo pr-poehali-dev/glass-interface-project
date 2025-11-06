@@ -6,6 +6,13 @@ import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [openDropdowns, setOpenDropdowns] = useState<string[]>([]);
+
+  const toggleDropdown = (name: string) => {
+    setOpenDropdowns((prev) =>
+      prev.includes(name) ? prev.filter((item) => item !== name) : [...prev, name]
+    );
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -215,8 +222,8 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <Card className="glass rounded-3xl p-6 shadow-lg lg:col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <Card className="glass rounded-3xl p-6 shadow-lg">
             <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
               <Icon name="FileText" className="text-red-500" size={24} />
               Связь мероприятий Администрации с Госпрограммами
@@ -245,7 +252,60 @@ const Index = () => {
             </div>
           </Card>
 
-          <Card className="glass rounded-3xl p-6 shadow-lg">
+          <Card className="glass-yellow rounded-3xl p-6 shadow-lg">
+            <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <Icon name="Wand2" className="text-yellow-600" size={24} />
+              Конструктор событий
+            </h2>
+            <div className="space-y-3">
+              {[
+                { name: 'Документы', icon: 'FileText', items: ['Распоряжения', 'Протоколы', 'Отчёты'] },
+                { name: 'Обращения', icon: 'MessageSquare', items: ['Жалобы', 'Предложения', 'Запросы'] },
+                { name: 'События', icon: 'Calendar', items: ['Мероприятия', 'Встречи', 'Форумы'] },
+                { name: 'Программы', icon: 'BookOpen', items: ['Госпрограммы', 'Нацпроекты', 'Региональные'] },
+                { name: 'Нацпроекты', icon: 'Flag', items: ['Образование', 'Здравоохранение', 'Экология'] },
+                { name: 'Участники', icon: 'Users', items: ['Администрация', 'НКО', 'Жители'] },
+              ].map((section) => (
+                <div key={section.name} className="bg-white/60 rounded-xl overflow-hidden border-2 border-yellow-400/30">
+                  <button
+                    onClick={() => toggleDropdown(section.name)}
+                    className="w-full flex items-center justify-between p-3 hover:bg-yellow-50/50 transition-colors"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Icon name={section.icon as any} size={18} className="text-yellow-600" />
+                      <span className="font-semibold text-gray-900">{section.name}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs bg-yellow-500 text-white px-2 py-0.5 rounded-full font-bold">+</span>
+                      <Icon
+                        name={openDropdowns.includes(section.name) ? 'ChevronUp' : 'ChevronDown'}
+                        size={18}
+                        className="text-gray-600"
+                      />
+                    </div>
+                  </button>
+                  {openDropdowns.includes(section.name) && (
+                    <div className="px-3 pb-3 space-y-1.5 bg-yellow-50/30">
+                      {section.items.map((item, idx) => (
+                        <label key={idx} className="flex items-center gap-2 cursor-pointer hover:bg-white/60 p-2 rounded-lg">
+                          <input type="checkbox" className="rounded border-yellow-500 text-yellow-600 focus:ring-yellow-500" />
+                          <span className="text-sm text-gray-700">{item}</span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            <Button className="w-full mt-4 bg-red-500 hover:bg-red-600 text-white rounded-xl">
+              Создать событие
+            </Button>
+          </Card>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+
+          <Card className="glass rounded-3xl p-6 shadow-lg lg:col-span-1">
             <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
               <Icon name="PieChart" className="text-red-500" size={24} />
               Распределение ресурсов
