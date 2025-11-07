@@ -172,10 +172,7 @@ const Index = () => {
           </Card>
 
           <Card className="glass-yellow rounded-3xl p-6 shadow-lg border-2 border-yellow-200">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-              <Icon name="ClipboardList" className="text-yellow-600" size={28} />
-              Поручения главы
-            </h2>
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">Поручения главы в сфере МСП</h2>
             <div className="space-y-3">
               {tasks.map((task, index) => (
                 <div
