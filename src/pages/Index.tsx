@@ -205,10 +205,7 @@ const Index = () => {
         </div>
 
         <Card className="glass rounded-3xl p-6 shadow-lg border-2 border-yellow-200">
-          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-            <Icon name="Target" className="text-red-600" size={28} />
-            Связь мероприятий Администрации с Госпрограммами
-          </h2>
+          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2"> Госпрограммы для реализации текущих запросов МСП</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {programs.map((prog, index) => (
               <div
