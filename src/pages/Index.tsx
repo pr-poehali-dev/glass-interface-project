@@ -153,7 +153,7 @@ const Index = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <Card className="glass rounded-3xl p-6 shadow-lg border-2 border-red-200">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">Облако мер поддержки </h2>
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">Облако мер поддержки ОКВЭД</h2>
             <div className="flex flex-wrap items-center justify-center gap-4 p-8 bg-gradient-to-br from-red-50/50 to-yellow-50/50 rounded-2xl min-h-[280px] border-2 border-black/5">
               {wordCloud.map((word, index) => (
                 <span
